@@ -1,121 +1,75 @@
-# Sales Forecasting com Machine Learning
+# 📈 Sales Forecasting with Machine Learning
 
-Previsão de receita mensal usando séries temporais e modelos de ML treinados sobre o Superstore Dataset.
-
----
-
-## O que o projeto faz
-
-Carrega dados reais de vendas, processa a série temporal, treina três modelos de machine learning e gera um forecast dos próximos 6 meses de receita.
+This project performs **monthly revenue forecasting** using time series analysis and Machine Learning models trained on the **Superstore Dataset**.
 
 ---
 
-## Dataset
+## 🚀 Project Overview
 
-[Superstore Sales Dataset](https://raw.githubusercontent.com/mikemooreviz/superstore/master/superstore.csv) — dados públicos de uma rede varejista americana com registros de pedidos entre 2014 e 2017.
+The script automates the entire data pipeline: loading real-world sales data, performing feature engineering for time series, training three different models, and generating a revenue forecast for the next 6 months.
 
 ---
 
-## Modelos utilizados
+## 📊 Dataset
 
-| Modelo | Tipo |
+We use the [Superstore Sales Dataset](https://raw.githubusercontent.com/mikemooreviz/superstore/master/superstore.csv) — public data from an American retail chain containing order records between 2014 and 2017.
+
+---
+
+## 🤖 Models Implemented
+
+| Model | Type |
 |---|---|
-| Linear Regression | Baseline linear |
-| Random Forest | Ensemble de árvores |
-| Gradient Boosting | Boosting sequencial |
+| **Linear Regression** | Linear baseline |
+| **Random Forest** | Tree-based ensemble |
+| **Gradient Boosting** | Sequential boosting |
 
-O modelo com menor MAPE no conjunto de teste é usado para o forecast final. Na maioria dos runs, o Random Forest performa melhor.
+> **Selection Criteria:** The model with the lowest **MAPE** (Mean Absolute Percentage Error) on the test set is selected for the final forecast. In most scenarios, **Random Forest** delivers the highest accuracy.
 
 ---
 
-## Features de entrada
+## 🛠️ Feature Engineering
 
-| Feature | Descrição |
+To capture seasonality and trends, the following features are generated:
+
+| Feature | Description |
 |---|---|
-| `mes_n` | Mês do ano (1–12) |
-| `tri` | Trimestre |
-| `ano` | Ano |
-| `l1`, `l2`, `l3` | Vendas dos 3 meses anteriores (lag) |
-| `ma3` | Média móvel 3 meses |
-| `ma6` | Média móvel 6 meses |
+| `month_n` | Month of the year (1–12) |
+| `qtr` | Quarter |
+| `year` | Year |
+| `l1`, `l2`, `l3` | Sales from the previous 3 months (Lag features) |
+| `ma3` | 3-month Moving Average |
+| `ma6` | 6-month Moving Average |
 
 ---
 
-## Resultados
+## 📈 Results & Visualizations
 
-Os gráficos abaixo são gerados automaticamente ao rodar o script.
+The following charts are automatically generated and saved in the `/img` folder when running the script:
 
-**Série temporal histórica**
+### 1. Historical Time Series
+![series](img/serie_temporal.png)
 
-![serie](img/serie_temporal.png)
+### 2. Seasonality & Trends
+![seasonality](img/sazonalidade.png)
 
-**Sazonalidade**
+### 3. Predicted vs. Actual (Test Set)
+![prediction](img/previsao_vs_real.png)
 
-![sazonalidade](img/sazonalidade.png)
-
-**Previsão vs Real**
-
-![previsao](img/previsao_vs_real.png)
-
-**Forecast 6 meses**
-
+### 4. 6-Month Revenue Forecast
 ![forecast](img/forecast.png)
 
-**Feature Importance**
-
+### 5. Feature Importance Ranking
 ![importance](img/feature_importance.png)
 
 ---
 
-## Como rodar
+## 💻 How to Run
 
-**1. Clona o repositório**
-
+### 1. Clone the repository
 ```bash
-git clone https://github.com/seu-usuario/sales-forecasting.git
+git clone [https://github.com/your-username/sales-forecasting.git](https://github.com/your-username/sales-forecasting.git)
 cd sales-forecasting
-```
-
-**2. Instala as dependências**
-
-```bash
-pip install -r requirements.txt
-```
-
-**3. Roda o script**
-
-```bash
-python forecasting.py
-```
-
-Ou abre direto no Google Colab:
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/seu-usuario/sales-forecasting/blob/main/forecasting.py)
-
----
-
-## Estrutura do projeto
-
-```
-sales-forecasting/
-├── forecasting.py        # script principal
-├── requirements.txt
-├── .gitignore
-├── img/                  # gráficos gerados pelo script
-└── README.md
-```
-
----
-
-## Conclusão
-
-A maior lição do projeto é que a qualidade das features importa mais do que a complexidade do modelo. As variáveis de lag (`l1`, `l2`, `l3`) e médias móveis dominaram o ranking de importância, o que faz sentido: em séries temporais de vendas, o comportamento recente é o melhor preditor do comportamento futuro.
-
-**Possíveis evoluções:**
-- Implementar ARIMA ou Prophet para comparação
-- Adicionar variáveis externas (inflação, feriados)
-- Cross-validation temporal em vez de split único
-- Intervalo de confiança no forecast
 
 ---
 
